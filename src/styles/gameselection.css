@@ -1,0 +1,41 @@
+.game-container {
+  display: grid;
+  /* height: 93vh; */
+}
+
+.games {
+  display: flex;
+  justify-content: space-around;
+}
+
+.game-card {
+  width: 15rem;
+  height: 30rem;
+  border: solid 3px black;
+}
+
+.game-card:hover {
+  scale: 1.1;
+}
+
+#gameboard-text {
+  font-size: 3rem;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.game1 {
+  background-image: url("../assets/game1crop.jpg");
+  background-size: cover;
+  border: "solid 3px black";
+}
+
+.game2 {
+  background-image: url("../assets/game2crop.png");
+  background-size: cover;
+}
+
+.game3 {
+  background-image: url("../assets/game3crop.jpg");
+  background-size: cover;
+}
