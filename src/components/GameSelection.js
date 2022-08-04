@@ -2,22 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/gameselection.css";
 
-const GameSelection = () => {
+const GameSelection = (props) => {
   // take games as prop
+  const { games } = props;
 
-  // test games prop
-  const defaultArray = [
-    { image: "imageURL", gameName: "game1" },
-    { image: "imageURL", gameName: "game2" },
-    { image: "imageURL", gameName: "game3" },
-  ];
   return (
     <div className="game-container">
       <div id="games-header">
         <h1 id="gameboard-text">Gameboards</h1>
       </div>
       <div className="games">
-        {defaultArray.map((game, i) => {
+        {games.map((game) => {
           return (
             <Link to={`/${game.gameName}`} key={game.gameName}>
               <div
