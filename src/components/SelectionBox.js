@@ -2,7 +2,16 @@ import React from "react";
 import "../styles/selectionbox.css";
 
 const SelectionBox = (props) => {
-  const { top, left, selections } = props;
+  const {
+    top,
+    left,
+    coordinates,
+    selections,
+    setItemSelection,
+    onClickHandler,
+    setShown,
+    shown,
+  } = props;
   // console.log("selection box");
   const boxStyle = {
     display: "grid",
@@ -24,7 +33,10 @@ const SelectionBox = (props) => {
             // style={{ display: "flex" }}
             key={selection}
             onClick={() => {
-              console.log(selection, top, left);
+              console.log(selection, coordinates[0], coordinates[1]);
+              setItemSelection(selection);
+              onClickHandler(selection);
+              setShown(!shown);
             }}
           >
             {selection}
