@@ -1,11 +1,15 @@
 .game-container {
   display: grid;
-  /* height: 93vh; */
 }
 
-.games {
+.games,
+.level-text-container {
   display: flex;
   justify-content: space-around;
+}
+
+.level-text-container {
+  padding-bottom: 1.5rem;
 }
 
 .game-card {
