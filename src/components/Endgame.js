@@ -1,15 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../styles/endgame.css";
 
 const Endgame = (props) => {
-  const { gameInfo, gameboard } = props;
+  const { gameboard, time } = props;
+
+  let seconds = Math.round(time / 1000);
+  let minutes = Math.round(seconds / 60);
+  let game;
+
+  if (gameboard === "game1") {
+    game = "gameboard one";
+  } else if (gameboard === "game2") {
+    game = "gameboard two";
+  } else {
+    game = "gameboard three";
+  }
   return (
     <div className="endgame-container">
-      <div>{gameboard}</div>
+      <div id="finish-text">
+        You finished {game}, with a time of {minutes}:{seconds}!
+      </div>
+      <div id="end-form">Would you like to publish to leaderboard?</div>
       <div className="button-container">
-        <Link to={"/"}>
-          <button>Home</button>
-        </Link>
+        <button>Yes</button>
+        <button>No</button>
       </div>
     </div>
   );
