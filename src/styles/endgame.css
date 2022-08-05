@@ -1,0 +1,13 @@
+.endgame-container {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.button-container {
+  display: grid;
+  width: 50%;
+  grid-template-columns: repeat(2, 1fr);
+}
