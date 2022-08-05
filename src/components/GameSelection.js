@@ -11,6 +11,11 @@ const GameSelection = (props) => {
       <div id="games-header">
         <h1 id="gameboard-text">Gameboards</h1>
       </div>
+      <div className="level-text-container">
+        <h2>Level 1</h2>
+        <h2>Level 2</h2>
+        <h2>Level 3</h2>
+      </div>
       <div className="games">
         {games.map((game) => {
           return (
