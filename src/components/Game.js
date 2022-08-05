@@ -11,11 +11,12 @@ const Game = () => {
   const [game, setGame] = useState("");
   const [shown, setShown] = useState(true);
   const [location, setLocation] = useState([0, 0]);
-  const [gameOneCoordinates, setGameOneCoordinates] = useState([]);
+  const [gameCoordinates, setGameCoordinates] = useState([]);
   const [clickCoordinates, setClickCoordinates] = useState([]);
   const [itemSelection, setItemSelection] = useState("");
-  const [gameOneItemsFound, setGameOneItemsFound] = useState([]);
+  const [gameItemsFound, setGameItemsFound] = useState([]);
   const [gameover, setGameover] = useState(false);
+  const [startTimer, setStartTimer] = useState(null);
 
   const gameOneSelections = [
     "Waldo",
@@ -27,37 +28,48 @@ const Game = () => {
   const gameTwoSelections = ["Waldo", "Odlaw", "Wizard"];
   const gameThreeSelections = ["Waldo", "Odlaw", "Wizard"];
 
-  const fetchGameOneCoords = async () => {
-    const gameOneCoordsCollection = collection(
-      database,
-      "game-one-coordinates"
-    );
-    const coordsSnapshot = await getDocs(gameOneCoordsCollection);
-    const gameOneCoordinates = coordsSnapshot.docs.map((doc) => ({
+  const fetchGameCoords = async (game) => {
+    let collectionName;
+    if (game === "game1") {
+      collectionName = "game-one-coordinates";
+    } else if (game === "game2") {
+      collectionName = "game-two-coordinates";
+    } else {
+      collectionName = "game-three-coordinates";
+    }
+    const gameCoordsCollection = collection(database, collectionName);
+    const coordsSnapshot = await getDocs(gameCoordsCollection);
+    const fetchedGameCoordinates = coordsSnapshot.docs.map((doc) => ({
       data: doc.data(),
       id: doc.id,
     }));
-    setGameOneCoordinates(gameOneCoordinates);
+    setGameCoordinates(fetchedGameCoordinates);
   };
 
   useEffect(() => {
     setGame(params.id);
-    fetchGameOneCoords();
-    console.log("reset game");
+    fetchGameCoords(params.id);
+    // reset on mount
     setGameover(false);
-    setGameOneItemsFound([]);
+    setGameItemsFound([]);
+    // init start time
+    setStartTimer(new Date());
   }, []);
 
   useEffect(() => {
-    console.log(gameOneCoordinates);
-  }, [gameOneCoordinates]);
+    console.log(gameCoordinates);
+  }, [gameCoordinates]);
 
   useEffect(() => {
-    console.log(gameOneItemsFound);
-    if (gameOneItemsFound.length === 5) {
+    console.log(gameItemsFound);
+    if (game === "game1" && gameItemsFound.length === 5) {
+      setGameover(true);
+    } else if (game === "game2" && gameItemsFound.length === 3) {
+      setGameover(true);
+    } else if (game === "game3" && gameItemsFound.length === 3) {
       setGameover(true);
     }
-  }, [gameOneItemsFound]);
+  }, [gameItemsFound]);
 
   useEffect(() => {
     console.log(itemSelection);
@@ -80,33 +92,50 @@ const Game = () => {
 
   const checkMatch = (selection) => {
     let index;
-    switch (selection) {
-      case "Dwight":
-        index = 0;
-        break;
-      case "Louise":
-        index = 1;
-        break;
-      case "Patrick":
-        index = 2;
-        break;
-      case "Quagmire":
-        index = 3;
-        break;
-      case "Waldo":
-        index = 4;
-        break;
-      default:
-        index = null;
+
+    if (game === "game1") {
+      switch (selection) {
+        case "Dwight":
+          index = 0;
+          break;
+        case "Louise":
+          index = 1;
+          break;
+        case "Patrick":
+          index = 2;
+          break;
+        case "Quagmire":
+          index = 3;
+          break;
+        case "Waldo":
+          index = 4;
+          break;
+        default:
+          index = null;
+      }
+    } else {
+      switch (selection) {
+        case "Odlaw":
+          index = 0;
+          break;
+        case "Waldo":
+          index = 1;
+          break;
+        case "Wizard":
+          index = 2;
+          break;
+        default:
+          index = null;
+      }
     }
 
     if (
-      clickCoordinates[0] === gameOneCoordinates[index].data.x &&
-      clickCoordinates[1] === gameOneCoordinates[index].data.y
+      clickCoordinates[0] === gameCoordinates[index].data.x &&
+      clickCoordinates[1] === gameCoordinates[index].data.y
     ) {
       console.log("match");
-      setGameOneItemsFound((state) => [...state, gameOneCoordinates[index].id]);
-      console.log(`${gameOneCoordinates[index].id} found`);
+      setGameItemsFound((state) => [...state, gameCoordinates[index].id]);
+      console.log(`${gameCoordinates[index].id} found`);
     } else {
       console.log("not match");
     }
@@ -125,14 +154,8 @@ const Game = () => {
   };
 
   if (gameover) {
-    return (
-      <Endgame
-        gameInfo={
-          "this should contain gameboard completed and time it took to complete"
-        }
-        gameboard={game}
-      />
-    );
+    const elapsedTime = new Date() - startTimer;
+    return <Endgame gameboard={game} time={elapsedTime} />;
   }
 
   if (game === "game1") {
@@ -142,7 +165,7 @@ const Game = () => {
         <div className="items-container">
           <div
             className={
-              gameOneItemsFound.includes("waldo")
+              gameItemsFound.includes("waldo")
                 ? "found item-card"
                 : "not-found item-card"
             }
@@ -155,7 +178,7 @@ const Game = () => {
           </div>
           <div
             className={
-              gameOneItemsFound.includes("quagmire")
+              gameItemsFound.includes("quagmire")
                 ? "found item-card"
                 : "not-found item-card"
             }
@@ -168,7 +191,7 @@ const Game = () => {
           </div>
           <div
             className={
-              gameOneItemsFound.includes("louise")
+              gameItemsFound.includes("louise")
                 ? "found item-card"
                 : "not-found item-card"
             }
@@ -181,7 +204,7 @@ const Game = () => {
           </div>
           <div
             className={
-              gameOneItemsFound.includes("patrick")
+              gameItemsFound.includes("patrick")
                 ? "found item-card"
                 : "not-found item-card"
             }
@@ -194,7 +217,7 @@ const Game = () => {
           </div>
           <div
             className={
-              gameOneItemsFound.includes("dwight")
+              gameItemsFound.includes("dwight")
                 ? "found item-card"
                 : "not-found item-card"
             }
@@ -226,7 +249,7 @@ const Game = () => {
             onClick={(e) => {
               getClickCoordinates(e);
               toggleDropdownMenu(e);
-              console.log(gameOneCoordinates[0].data.x);
+              console.log(gameCoordinates[0].data.x);
             }}
           />
         </div>
@@ -237,21 +260,39 @@ const Game = () => {
       <div className="game-container">
         {/* <div id="find-text">Things to find</div> */}
         <div className="items-container">
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("waldo")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/waldo.png")}
               alt="item"
               id="item-img"
             />
           </div>
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("odlaw")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/odlaw.png")}
               alt="item"
               id="item-img"
             />
           </div>
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("wizard")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/wizard.png")}
               alt="item"
@@ -264,7 +305,12 @@ const Game = () => {
             <SelectionBox
               top={location[0]}
               left={location[1]}
+              coordinates={clickCoordinates}
               selections={gameTwoSelections}
+              setItemSelection={setItemSelection}
+              onClickHandler={checkMatch}
+              setShown={setShown}
+              shown={shown}
             />
           ) : null}
           <img
@@ -284,21 +330,39 @@ const Game = () => {
       <div className="game-container">
         {/* <div id="find-text">Things to find</div> */}
         <div className="items-container">
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("waldo")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/waldo.png")}
               alt="item"
               id="item-img"
             />
           </div>
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("odlaw")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/odlaw.png")}
               alt="item"
               id="item-img"
             />
           </div>
-          <div className="item-card not-found">
+          <div
+            className={
+              gameItemsFound.includes("wizard")
+                ? "found item-card"
+                : "not-found item-card"
+            }
+          >
             <img
               src={require("../assets/wizard.png")}
               alt="item"
@@ -311,7 +375,12 @@ const Game = () => {
             <SelectionBox
               top={location[0]}
               left={location[1]}
+              coordinates={clickCoordinates}
               selections={gameThreeSelections}
+              setItemSelection={setItemSelection}
+              onClickHandler={checkMatch}
+              setShown={setShown}
+              shown={shown}
             />
           ) : null}
           <img
