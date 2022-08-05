@@ -80,12 +80,12 @@ const Game = () => {
   }, [clickCoordinates]);
 
   const toggleDropdownMenu = (e) => {
-    // console.log(obj);
+    console.log(e);
     if (!shown) {
-      setLocation([e.clientY, e.clientX]);
+      setLocation([e.pageY, e.pageX]);
       setShown(!shown);
     } else {
-      setLocation([e.clientY, e.clientX]);
+      setLocation([e.pageY, e.pageX]);
       setShown(!shown);
     }
   };
