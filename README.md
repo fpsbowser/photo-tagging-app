@@ -1,4 +1,4 @@
-# Photo Tagging App!
+# Photo Tagging App
 
 Where's Wlado BUT not just Waldo!
 
