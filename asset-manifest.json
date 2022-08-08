@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/photo-tagging-app/static/css/main.330cb09d.css",
-    "main.js": "/photo-tagging-app/static/js/main.0b310407.js",
+    "main.js": "/photo-tagging-app/static/js/main.af9b474a.js",
     "static/media/game2.png": "/photo-tagging-app/static/media/game2.597e7252ca63eb110588.png",
     "static/media/game1.jpg": "/photo-tagging-app/static/media/game1.a657275798e72ececb4c.jpg",
     "static/media/game3.jpg": "/photo-tagging-app/static/media/game3.e0f46b1a2d2cb9ba24d8.jpg",
@@ -17,10 +17,10 @@
     "static/media/wizard.png": "/photo-tagging-app/static/media/wizard.c320dda2f39e89077415.png",
     "index.html": "/photo-tagging-app/index.html",
     "main.330cb09d.css.map": "/photo-tagging-app/static/css/main.330cb09d.css.map",
-    "main.0b310407.js.map": "/photo-tagging-app/static/js/main.0b310407.js.map"
+    "main.af9b474a.js.map": "/photo-tagging-app/static/js/main.af9b474a.js.map"
   },
   "entrypoints": [
     "static/css/main.330cb09d.css",
-    "static/js/main.0b310407.js"
+    "static/js/main.af9b474a.js"
   ]
 }
