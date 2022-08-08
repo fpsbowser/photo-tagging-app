@@ -1,0 +1,22 @@
+.about-container {
+  display: grid;
+  justify-items: center;
+  padding-top: 2rem;
+}
+
+#about-header {
+  font-family: "JetBrains Mono", monospace;
+}
+
+#description {
+  font-family: "JetBrains Mono", monospace;
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 3rem;
+}
+
+#odin-link {
+  font-family: "JetBrains Mono", monospace;
+  color: black;
+  text-decoration: underline;
+}
