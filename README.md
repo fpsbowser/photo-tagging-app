@@ -3,7 +3,7 @@
 Where's Wlado BUT not just Waldo!
 
 Three levels that get progressively harder. How fast can you find Waldo and friends?
-[Play here!](fpsbowser.github.io/photo-tagging-app/)
+[Play here!](https://fpsbowser.github.io/photo-tagging-app/)
 
 ### Summary
 
