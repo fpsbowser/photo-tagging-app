@@ -1,5 +1,6 @@
 .game-container {
   display: grid;
+  padding-top: 2rem;
 }
 
 .games,
@@ -20,12 +21,6 @@
 
 .game-card:hover {
   scale: 1.1;
-}
-
-#gameboard-text {
-  font-size: 3rem;
-  text-align: center;
-  padding-bottom: 3rem;
 }
 
 .game1 {
