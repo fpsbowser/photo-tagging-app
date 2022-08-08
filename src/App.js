@@ -10,7 +10,7 @@ import "./styles/app.css";
 
 const App = () => {
   return (
-    <Router basename="/">
+    <Router basename="/photo-tagging-app">
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
