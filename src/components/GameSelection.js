@@ -8,9 +8,6 @@ const GameSelection = (props) => {
 
   return (
     <div className="game-container">
-      <div id="games-header">
-        <h1 id="gameboard-text">Gameboards</h1>
-      </div>
       <div className="level-text-container">
         <h2>Level 1</h2>
         <h2>Level 2</h2>
@@ -20,12 +17,7 @@ const GameSelection = (props) => {
         {games.map((game) => {
           return (
             <Link to={`/${game.gameName}`} key={game.gameName}>
-              <div
-                className={`game-card ${game.gameName}`}
-                onClick={(e) => {
-                  console.log(e);
-                }}
-              ></div>
+              <div className={`game-card ${game.gameName}`}></div>
             </Link>
           );
         })}
