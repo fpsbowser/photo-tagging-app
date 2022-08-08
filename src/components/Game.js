@@ -5,6 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { database } from "./firebase";
 import "../styles/game.css";
 import Endgame from "./Endgame";
+import Social from "./Social";
 
 const Game = () => {
   const params = useParams();
@@ -13,7 +14,6 @@ const Game = () => {
   const [location, setLocation] = useState([0, 0]);
   const [gameCoordinates, setGameCoordinates] = useState([]);
   const [clickCoordinates, setClickCoordinates] = useState([]);
-  const [itemSelection, setItemSelection] = useState("");
   const [gameItemsFound, setGameItemsFound] = useState([]);
   const [gameover, setGameover] = useState(false);
   const [startTimer, setStartTimer] = useState(null);
@@ -57,11 +57,6 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-    console.log(gameCoordinates);
-  }, [gameCoordinates]);
-
-  useEffect(() => {
-    console.log(gameItemsFound);
     if (game === "game1" && gameItemsFound.length === 5) {
       setGameover(true);
     } else if (game === "game2" && gameItemsFound.length === 3) {
@@ -70,10 +65,6 @@ const Game = () => {
       setGameover(true);
     }
   }, [gameItemsFound]);
-
-  useEffect(() => {
-    console.log(itemSelection);
-  }, [itemSelection]);
 
   useEffect(() => {
     console.log(`click coords updated ${clickCoordinates}`);
@@ -130,8 +121,8 @@ const Game = () => {
     }
 
     if (
-      clickCoordinates[0] === gameCoordinates[index].data.x &&
-      clickCoordinates[1] === gameCoordinates[index].data.y
+      clickCoordinates[0] - gameCoordinates[index].data.x < 2 &&
+      clickCoordinates[1] - gameCoordinates[index].data.y < 2
     ) {
       console.log("match");
       setGameItemsFound((state) => [...state, gameCoordinates[index].id]);
@@ -160,8 +151,7 @@ const Game = () => {
 
   if (game === "game1") {
     return (
-      <div className="game-container">
-        {/* <div id="find-text">Things to find</div> */}
+      <div className="gameboard-container">
         <div className="items-container">
           <div
             className={
@@ -229,6 +219,7 @@ const Game = () => {
             />
           </div>
         </div>
+
         <div className="gameboard">
           {location && !shown ? (
             <SelectionBox
@@ -236,7 +227,6 @@ const Game = () => {
               left={location[1]}
               coordinates={clickCoordinates}
               selections={gameOneSelections}
-              setItemSelection={setItemSelection}
               onClickHandler={checkMatch}
               setShown={setShown}
               shown={shown}
@@ -253,12 +243,12 @@ const Game = () => {
             }}
           />
         </div>
+        <Social />
       </div>
     );
   } else if (game === "game2") {
     return (
-      <div className="game-container">
-        {/* <div id="find-text">Things to find</div> */}
+      <div className="gameboard-container">
         <div className="items-container">
           <div
             className={
@@ -307,7 +297,6 @@ const Game = () => {
               left={location[1]}
               coordinates={clickCoordinates}
               selections={gameTwoSelections}
-              setItemSelection={setItemSelection}
               onClickHandler={checkMatch}
               setShown={setShown}
               shown={shown}
@@ -327,8 +316,7 @@ const Game = () => {
     );
   } else {
     return (
-      <div className="game-container">
-        {/* <div id="find-text">Things to find</div> */}
+      <div className="gameboard-container">
         <div className="items-container">
           <div
             className={
@@ -377,7 +365,6 @@ const Game = () => {
               left={location[1]}
               coordinates={clickCoordinates}
               selections={gameThreeSelections}
-              setItemSelection={setItemSelection}
               onClickHandler={checkMatch}
               setShown={setShown}
               shown={shown}
