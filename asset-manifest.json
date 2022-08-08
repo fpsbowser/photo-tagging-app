@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/photo-tagging-app/static/css/main.330cb09d.css",
+    "main.js": "/photo-tagging-app/static/js/main.0b310407.js",
+    "static/media/game2.png": "/photo-tagging-app/static/media/game2.597e7252ca63eb110588.png",
+    "static/media/game1.jpg": "/photo-tagging-app/static/media/game1.a657275798e72ececb4c.jpg",
+    "static/media/game3.jpg": "/photo-tagging-app/static/media/game3.e0f46b1a2d2cb9ba24d8.jpg",
+    "static/media/game2crop.png": "/photo-tagging-app/static/media/game2crop.3858f4acde1fe6a5fef8.png",
+    "static/media/game1crop.jpg": "/photo-tagging-app/static/media/game1crop.27a4dda66768aab09b7a.jpg",
+    "static/media/game3crop.jpg": "/photo-tagging-app/static/media/game3crop.addd75d94e783e5c1b3e.jpg",
+    "static/media/louise.png": "/photo-tagging-app/static/media/louise.1e0bc0d22e9ab181df0a.png",
+    "static/media/dwight.png": "/photo-tagging-app/static/media/dwight.573c91d3f75e94daf6b5.png",
+    "static/media/Glenn_Quagmire.png": "/photo-tagging-app/static/media/Glenn_Quagmire.c1c54cb414d5c601441a.png",
+    "static/media/waldo.png": "/photo-tagging-app/static/media/waldo.fd4774db672dcf4cc64d.png",
+    "static/media/odlaw.png": "/photo-tagging-app/static/media/odlaw.209de96d5d913be40043.png",
+    "static/media/patrick.jpg": "/photo-tagging-app/static/media/patrick.bb6c0e176a87de64e9af.jpg",
+    "static/media/wizard.png": "/photo-tagging-app/static/media/wizard.c320dda2f39e89077415.png",
+    "index.html": "/photo-tagging-app/index.html",
+    "main.330cb09d.css.map": "/photo-tagging-app/static/css/main.330cb09d.css.map",
+    "main.0b310407.js.map": "/photo-tagging-app/static/js/main.0b310407.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.330cb09d.css",
+    "static/js/main.0b310407.js"
+  ]
+}
